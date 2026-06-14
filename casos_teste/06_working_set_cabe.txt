@@ -1,0 +1,14 @@
+# Working set MENOR que a memoria (3 paginas distintas, 3 frames).
+# Apos preencher os frames, todos os acessos seguintes sao Hit.
+# Esperado: apenas 3 faults (a carga inicial), taxa baixa, FIFO == LRU.
+3
+1
+2
+3
+1
+2
+3
+1
+2
+3
+3

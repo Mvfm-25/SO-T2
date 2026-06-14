@@ -1,0 +1,17 @@
+# Localidade temporal: a pagina 4 e reacessada com frequencia.
+# O LRU mantem a pagina 4 (usada recentemente) enquanto o FIFO a expulsa
+# apenas por ser "antiga" na fila -> LRU gera MENOS faults que o FIFO.
+# Esperado (3 frames): FIFO -> 8 faults (66.67%) | LRU -> 5 faults (41.67%)
+3
+4
+2
+4
+3
+4
+0
+4
+3
+0
+2
+3
+0

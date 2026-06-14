@@ -1,0 +1,16 @@
+# Laco sequencial com working set MAIOR que a memoria (4 paginas, 3 frames).
+# Pior caso classico: tanto FIFO quanto LRU geram 100% de page faults
+# (thrashing). Util para demonstrar o limite dos algoritmos.
+3
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4

@@ -1,0 +1,7 @@
+# Mesma cadeia do gabarito (3 frames), mas escrita em formato "livre" para
+# exercitar o parser robusto: varios numeros por linha, espacos/tabs extras
+# e comentario no fim da linha. Deve produzir EXATAMENTE o resultado do
+# gabarito: FIFO -> 10 faults (83.33%) | LRU -> 9 faults (75.00%).
+3
+7 0 1 2 0 3
+0 4 2 3 0 3   # restante dos acessos

@@ -1,0 +1,15 @@
+# Anomalia de Belady (parte 2 de 2) - mesma sequencia com 4 frames.
+# Veja a explicacao em 02_belady_3frames.txt.
+4
+1
+2
+3
+4
+1
+2
+5
+1
+2
+3
+4
+5

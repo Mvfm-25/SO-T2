@@ -1,0 +1,17 @@
+# Anomalia de Belady (parte 1 de 2) - mesma sequencia com 3 frames.
+# Compare o numero de faults FIFO deste arquivo com o de 03_belady_4frames.txt:
+# no FIFO, AUMENTAR os frames de 3 para 4 AUMENTA os page faults (anomalia).
+# O LRU nao sofre esse efeito (e um algoritmo de pilha).
+3
+1
+2
+3
+4
+1
+2
+5
+1
+2
+3
+4
+5

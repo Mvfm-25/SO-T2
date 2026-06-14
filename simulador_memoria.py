@@ -100,28 +100,44 @@ class Simulador:
         self.algoritmo = algoritmo.upper()
 
     def _ler_entrada(self):
-        """Lê o arquivo de entrada e retorna (num_frames, lista_de_paginas)."""
+        """Lê o arquivo de entrada e retorna (num_frames, lista_de_paginas).
+
+        O parsing é tolerante ao formato: aceita um número por linha (padrão do
+        enunciado), vários números na mesma linha, espaços/tabs extras e
+        comentários iniciados por '#' (linha inteira ou no fim da linha). O
+        primeiro número encontrado é o total de frames; os demais são as páginas.
+        """
         try:
-            with open(self.caminho_arquivo, "r") as arquivo:
-                linhas = arquivo.readlines()
+            # utf-8-sig descarta um eventual BOM gravado por editores no Windows.
+            with open(self.caminho_arquivo, "r", encoding="utf-8-sig") as arquivo:
+                conteudo = arquivo.read()
         except FileNotFoundError:
             print(f"Erro: O arquivo '{self.caminho_arquivo}' não foi encontrado.")
             return None, None
+        except OSError as erro:
+            print(f"Erro ao abrir o arquivo '{self.caminho_arquivo}': {erro}")
+            return None, None
 
-        # Remove linhas vazias e comentários (#)
-        linhas = [l.strip() for l in linhas if l.strip() and not l.strip().startswith("#")]
+        # Coleta os tokens numéricos linha a linha, removendo comentários inline (#)
+        # e qualquer espaçamento. Funciona tanto para "um número por linha" quanto
+        # para sequências separadas por espaços/tabs.
+        tokens = []
+        for linha in conteudo.splitlines():
+            sem_comentario = linha.split("#", 1)[0]
+            tokens.extend(sem_comentario.split())
 
-        if not linhas:
-            print("Erro: Arquivo de entrada vazio.")
+        if not tokens:
+            print("Erro: Arquivo de entrada vazio ou sem dados numéricos.")
             return None, None
 
         try:
-            # A primeira linha válida define o número de frames na memória RAM simulada
-            num_frames = int(linhas[0])
-            paginas = [int(linha) for linha in linhas[1:]]
+            numeros = [int(token) for token in tokens]
         except ValueError:
-            print("Erro: O arquivo de entrada deve conter apenas números inteiros (um por linha).")
+            print("Erro: O arquivo de entrada deve conter apenas números inteiros.")
             return None, None
+
+        # O primeiro número define a quantidade de frames; o restante são as páginas.
+        num_frames, paginas = numeros[0], numeros[1:]
 
         if num_frames <= 0:
             print("Erro: O número de frames deve ser um inteiro positivo.")
